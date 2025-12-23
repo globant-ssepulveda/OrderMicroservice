@@ -2,6 +2,8 @@ package grandmasfood.order.domain.spi;
 
 import grandmasfood.order.domain.models.Client;
 
+import java.util.Optional;
+
 public interface IClientPersistencePort {
-    Client getClientByDocument(String document);
+    Optional<Client> getClientByDocument(String document);
 }

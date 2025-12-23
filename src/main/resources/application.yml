@@ -1,2 +1,26 @@
 server:
-  port: 8081
+  port: 8082
+
+spring:
+  datasource:
+    driver-class-name: software.amazon.jdbc.Driver
+    url: jdbc:aws-wrapper:mysql://ecommerce-db.cwnqc6aiq5z8.us-east-1.rds.amazonaws.com:3306/clients?wrapperPlugins=awsSecretsManager&secretsManagerSecretId=arn:aws:secretsmanager:us-east-1:820754029757:secret:rds%21db-d762b259-c2c7-4997-b4fb-079bcf17d3f7-tvyjtZ&secretsManagerRegion=us-east-1
+    username: ${DATABASE_USER:admin}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+micros:
+  client:
+    url: ${MICROS_CLIENT_URL:http://alb-ecommerce-579008339.us-east-1.elb.amazonaws.com/clients}
+  product:
+    url: ${MICROS_PRODUCT_URL:http://alb-ecommerce-579008339.us-east-1.elb.amazonaws.com/products}
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      productService:
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
