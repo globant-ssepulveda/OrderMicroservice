@@ -8,7 +8,7 @@ on:
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: orders
-  ECS_SERVICE: orders-task-service-m6g5ry1k
+  ECS_SERVICE: orders-task-service-ayx3scgh
   ECS_CLUSTER: micros-cluster
   CONTAINER_NAME: orders
 
